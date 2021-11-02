@@ -106,6 +106,10 @@ namespace Harness {
             const lineAndCharacter = this.currentSourceFile.getLineAndCharacterOfPosition(actualPos);
             const sourceText = ts.getSourceTextOfNodeFromSourceFile(this.currentSourceFile, node);
 
+            if(sourceText === "bar1") {
+              debugger;
+            }
+
             if (!isSymbolWalk) {
                 // Don't try to get the type of something that's already a type.
                 // Exception for `T` in `type T = something` because that may evaluate to some interesting type.

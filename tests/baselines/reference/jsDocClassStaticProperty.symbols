@@ -1,0 +1,39 @@
+=== /a.js ===
+class Foo1 {
+>Foo1 : Symbol(Foo1, Decl(a.js, 0, 0))
+
+  constructor() { }
+  /** instance bar */
+  readonly bar = 'instance Foo1';
+>bar : Symbol(Foo1.bar, Decl(a.js, 1, 19))
+}
+
+class Foo2 extends Foo1 {
+>Foo2 : Symbol(Foo2, Decl(a.js, 4, 1))
+>Foo1 : Symbol(Foo1, Decl(a.js, 0, 0))
+
+  static readonly bar = 'class Foo2';
+>bar : Symbol(Foo2.bar, Decl(a.js, 6, 25))
+}
+
+class Foo3 {
+>Foo3 : Symbol(Foo3, Decl(a.js, 8, 1))
+
+  constructor() {
+  }
+  /** instance bar */
+  readonly bar = 'instance Foo3';
+>bar : Symbol(Foo3.bar, Decl(a.js, 12, 3))
+
+  /** class bar */
+  static readonly bar: string = 'class Foo3';
+>bar : Symbol(Foo3.bar, Decl(a.js, 14, 33))
+}
+
+class Foo4 extends Foo3 {
+>Foo4 : Symbol(Foo4, Decl(a.js, 17, 1))
+>Foo3 : Symbol(Foo3, Decl(a.js, 8, 1))
+
+  static readonly bar = 'class Foo4';
+>bar : Symbol(Foo4.bar, Decl(a.js, 19, 25))
+}

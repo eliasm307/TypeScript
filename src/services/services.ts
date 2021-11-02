@@ -1627,6 +1627,7 @@ namespace ts {
             );
         }
 
+
         function getCompletionEntrySymbol(fileName: string, position: number, name: string, source?: string, preferences: UserPreferences = emptyOptions): Symbol | undefined {
             synchronizeHostData();
             return Completions.getCompletionEntrySymbol(program, log, getValidSourceFile(fileName), position, { name, source }, host, preferences);
@@ -1667,6 +1668,7 @@ namespace ts {
                 textSpan: createTextSpanFromNode(nodeForQuickInfo, sourceFile),
                 displayParts,
                 documentation,
+                // ! investigate
                 tags,
             };
         }

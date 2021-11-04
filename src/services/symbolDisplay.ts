@@ -497,6 +497,7 @@ namespace ts.SymbolDisplay {
                         displayParts.push(keywordPart(SyntaxKind.ThisKeyword));
                     }
                     else {
+                      // ! adds "(property) c9.bar2"
                         addPrefixForAnyFunctionOrVar(symbol, symbolKind);
                     }
 
@@ -650,6 +651,7 @@ namespace ts.SymbolDisplay {
                     displayParts.push(textOrKeywordPart(symbolKind));
                     return;
                 default:
+                  // ! start of symbol kind shown in quick info
                     displayParts.push(punctuationPart(SyntaxKind.OpenParenToken));
                     displayParts.push(textOrKeywordPart(symbolKind));
                     displayParts.push(punctuationPart(SyntaxKind.CloseParenToken));

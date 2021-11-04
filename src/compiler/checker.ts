@@ -12253,8 +12253,10 @@ namespace ts {
          * @param name a name of property to look up in a given type
          */
         function getPropertyOfType(type: Type, name: __String, skipObjectFunctionPropertyAugment?: boolean): Symbol | undefined {
+          // ! getting close to the issue
             type = getReducedApparentType(type);
             if (type.flags & TypeFlags.Object) {
+              // ! this is where the symbol for the parent instance variable comes from
                 const resolved = resolveStructuredTypeMembers(type as ObjectType);
                 const symbol = resolved.members.get(name);
                 if (symbol && symbolIsValue(symbol)) {

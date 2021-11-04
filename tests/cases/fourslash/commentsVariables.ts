@@ -96,3 +96,4 @@ verify.quickInfos({
     14: ["function foo(): void", "foos comment"],
     15: "function foo2(a: number): void (+1 overload)"
 });
+

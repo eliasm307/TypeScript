@@ -579,6 +579,8 @@ namespace ts {
     }
 
     function getDocumentationComment(declarations: readonly Declaration[] | undefined, checker: TypeChecker | undefined): SymbolDisplayPart[] {
+debugger;
+
         if (!declarations) return emptyArray;
 
         let doc = JsDoc.getJsDocCommentsFromDeclarations(declarations, checker);
@@ -599,13 +601,21 @@ namespace ts {
     }
 
     function findBaseOfDeclaration<T>(checker: TypeChecker, declaration: Declaration, cb: (symbol: Symbol) => T[] | undefined): T[] | undefined {
+      debugger;
         const classOrInterfaceDeclaration = declaration.parent?.kind === SyntaxKind.Constructor ? declaration.parent.parent : declaration.parent;
         if (!classOrInterfaceDeclaration) {
             return;
         }
         return firstDefined(getAllSuperTypeNodes(classOrInterfaceDeclaration), superTypeNode => {
             const symbol = checker.getPropertyOfType(checker.getTypeAtLocation(superTypeNode), declaration.symbol.name);
-            return symbol ? cb(symbol) : undefined;
+            debugger;
+            if(symbol) {
+              throw Error("symbol")
+            // ! there should be a check to make sure the properties are either both static or not
+            const sameLevel = isStatic(declaration) === isStatic(symbol.declarations![0])
+            return sameLevel ? cb(symbol) : undefined;
+            }
+            // return symbol ? cb(symbol) : undefined;
         });
     }
 
@@ -1648,6 +1658,7 @@ namespace ts {
             const symbol = getSymbolAtLocationForQuickInfo(nodeForQuickInfo, typeChecker);
 
             if (!symbol || typeChecker.isUnknownSymbol(symbol)) {
+              debugger;
                 const type = shouldGetType(sourceFile, nodeForQuickInfo, position) ? typeChecker.getTypeAtLocation(nodeForQuickInfo) : undefined;
                 return type && {
                     kind: ScriptElementKind.unknown,
@@ -1660,7 +1671,7 @@ namespace ts {
             }
 
             const { symbolKind, displayParts, documentation, tags } = typeChecker.runWithCancellationToken(cancellationToken, typeChecker =>
-                SymbolDisplay.getSymbolDisplayPartsDocumentationAndSymbolKind(typeChecker, symbol, sourceFile, getContainerNode(nodeForQuickInfo), nodeForQuickInfo)
+                SymbolDisplay.getSymbolDisplayPartsDocumentationAndSymbolKind(typeChecker, symbol, sourceFile, getContainerNode(nodeForQuickInfo) /* ie class Node */, nodeForQuickInfo)
             );
             return {
                 kind: symbolKind,

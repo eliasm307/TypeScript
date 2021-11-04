@@ -400,7 +400,12 @@ namespace FourSlash {
                         continue;
                     }
                     const memo = Utils.memoize(
-                        (_version: number, _active: string, _caret: number, _selectEnd: number, _marker: string, ...args: any[]) => (ls[key] as Function)(...args),
+                        (_version: number, _active: string, _caret: number, _selectEnd: number, _marker: string, ...args: any[]) => {
+                          if(key === 'getQuickInfoAtPosition'){
+                            // debugger;
+                          }
+                        return ( ls[ key ] as Function )( ...args );
+                      },
                         (...args) => args.map(a => a && typeof a === "object" ? JSON.stringify(a) : a).join("|,|")
                     );
                     proxy[key] = (...args: any[]) => memo(

@@ -108,7 +108,7 @@ namespace ts {
         QuestionQuestionEqualsToken,
         CaretEqualsToken,
         // Identifiers and PrivateIdentifiers
-        Identifier,
+        Identifier, // ! type of static properties
         PrivateIdentifier,
         // Reserved words
         BreakKeyword,
@@ -204,7 +204,7 @@ namespace ts {
         Decorator,
         // TypeMember
         PropertySignature,
-        PropertyDeclaration,
+        PropertyDeclaration, // ! parent of symbols 166
         MethodSignature,
         MethodDeclaration,
         ClassStaticBlockDeclaration,
@@ -268,7 +268,7 @@ namespace ts {
         SpreadElement,
         ClassExpression,
         OmittedExpression,
-        ExpressionWithTypeArguments,
+        ExpressionWithTypeArguments, // ! 227 kind of c7
         AsExpression,
         NonNullExpression,
         MetaProperty,
@@ -340,7 +340,7 @@ namespace ts {
         // Clauses
         CaseClause,
         DefaultClause,
-        HeritageClause,
+        HeritageClause, // ! 290
         CatchClause,
         AssertClause,
         AssertEntry,

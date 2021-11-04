@@ -22,5 +22,5 @@
 // ! should be in commentsInheritanceFourslash.ts but test doesn't run
 verify.quickInfos({
   58: "(property) c8.bar1: \"class c8\"",
-  // 59: ["(property) c10.bar2: \"class c10\"", "class bar"],
+  59: ["(property) c10.bar2: \"class c10\"", "class bar"],
 });

@@ -609,11 +609,11 @@ debugger;
         return firstDefined(getAllSuperTypeNodes(classOrInterfaceDeclaration), superTypeNode => {
             const symbol = checker.getPropertyOfType(checker.getTypeAtLocation(superTypeNode), declaration.symbol.name);
             debugger;
+
             if(symbol) {
-              throw Error("symbol")
             // ! there should be a check to make sure the properties are either both static or not
-            const sameLevel = isStatic(declaration) === isStatic(symbol.declarations![0])
-            return sameLevel ? cb(symbol) : undefined;
+            const bothStaticOrInstanceVars = isStatic(declaration) === isStatic(symbol.declarations![0]);
+            return bothStaticOrInstanceVars   ? cb(symbol) : undefined;
             }
             // return symbol ? cb(symbol) : undefined;
         });

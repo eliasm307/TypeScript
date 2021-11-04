@@ -1,7 +1,8 @@
 {
     "recommendations": [
-        "dbaeumer.vscode-eslint",
-        "rbuckton.tsserver-live-reload"
+      "dbaeumer.vscode-eslint",
+      "rbuckton.tsserver-live-reload",
+      "usernamehw.errorlens"
     ],
 
     "unwantedRecommendations": [

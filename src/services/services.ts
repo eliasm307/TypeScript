@@ -579,7 +579,6 @@ namespace ts {
     }
 
     function getDocumentationComment(declarations: readonly Declaration[] | undefined, checker: TypeChecker | undefined): SymbolDisplayPart[] {
-debugger;
 
         if (!declarations) return emptyArray;
 
@@ -601,18 +600,23 @@ debugger;
     }
 
     function findBaseOfDeclaration<T>(checker: TypeChecker, declaration: Declaration, cb: (symbol: Symbol) => T[] | undefined): T[] | undefined {
-      debugger;
+
         const classOrInterfaceDeclaration = declaration.parent?.kind === SyntaxKind.Constructor ? declaration.parent.parent : declaration.parent;
         if (!classOrInterfaceDeclaration) {
             return;
         }
         return firstDefined(getAllSuperTypeNodes(classOrInterfaceDeclaration), superTypeNode => {
+          debugger;
+          const typeWithInstanceAndStaticMembers = checker.getTypeAtLocation(superTypeNode);
+          debugger;
             const symbol = checker.getPropertyOfType(checker.getTypeAtLocation(superTypeNode), declaration.symbol.name);
-            debugger;
+
 
             if(symbol) {
             // ! there should be a check to make sure the properties are either both static or not
-            const bothStaticOrInstanceVars = isStatic(declaration) === isStatic(symbol.declarations![0]);
+            const declaration1Static = isStatic(declaration) ;
+            const declaration2Static =   isStatic(symbol.declarations![0]);
+            const bothStaticOrInstanceVars = declaration1Static === declaration2Static;
             return bothStaticOrInstanceVars   ? cb(symbol) : undefined;
             }
             // return symbol ? cb(symbol) : undefined;
